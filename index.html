@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donutslovers_mb | Caseiros - Sabor Sem Igual</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        donut: {
+                            pink: '#ff6b8b',
+                            pinkDark: '#e6496f',
+                            pinkLight: '#fff0f3',
+                            chocolate: '#2d1b10',
+                            chocolateLight: '#4a2e1d',
+                            cream: '#faf6f0',
+                            softBg: '#f8f4f0',
+                            accent: '#d4af37'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .glass-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .modal-enter { opacity: 0; transform: scale(0.95); }
+        .modal-enter-active { opacity: 1; transform: scale(1); transition: opacity 200ms, transform 200ms; }
+    </style>
+</head>
+<body class="bg-donut-cream text-donut-chocolate font-sans antialiased min-h-screen flex flex-col selection:bg-donut-pink selection:text-white pb-20 md:pb-0">
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="bg-donut-chocolate text-donut-cream text-xs py-2.5 px-4 text-center font-medium">
+        <div class="max-w-7xl mx-auto flex items-center justify-center gap-2 flex-wrap">
+            <span class="bg-donut-pink text-white text-[10px] px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider">Aviso</span>
+            <span>Verifique a disponibilidade do dia. Reservas mediante taxa de 50% via M-Pesa / e-Mola.</span>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="sticky top-0 z-40 glass-header border-b border-donut-pink/10 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3">
+                <div class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-donut-pink text-white flex items-center justify-center text-xl shadow-sm">
+                    <i class="fa-solid fa-circle-dot"></i>
+                </div>
+                <div>
+                    <h1 class="font-serif font-bold text-lg md:text-2xl text-donut-chocolate tracking-tight">
+                        Donutslovers_mb
+                    </h1>
+                    <p class="text-[11px] md:text-xs text-donut-chocolate/70 font-medium">Caseiros | Sabor Sem Igual • <span class="text-donut-pink font-semibold">Josué 1:7-9</span></p>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center gap-8 font-semibold text-sm">
+                <a href="#inicio" class="text-donut-chocolate hover:text-donut-pink transition-colors">Início</a>
+                <a href="#cardapio" class="text-donut-chocolate hover:text-donut-pink transition-colors">Cardápio</a>
+                <a href="#personalizados" class="text-donut-chocolate hover:text-donut-pink transition-colors">Personalizados</a>
+                <a href="#combos" class="text-donut-chocolate hover:text-donut-pink transition-colors">Combos</a>
+                <a href="#galeria" class="text-donut-chocolate hover:text-donut-pink transition-colors">Galeria</a>
+                <a href="#contacto" class="text-donut-chocolate hover:text-donut-pink transition-colors">Contacto</a>
+            </nav>
+
+            <!-- Cart Toggle Button -->
+            <button onclick="toggleCartDrawer()" class="relative bg-donut-pink hover:bg-donut-pinkDark text-white px-4 md:px-5 py-2.5 rounded-full font-bold flex items-center gap-2.5 shadow-sm hover:shadow transition-all text-xs md:text-sm">
+                <div class="relative">
+                    <i class="fa-solid fa-bag-shopping text-base"></i>
+                    <span id="cart-badge-count" class="absolute -top-2 -right-2 bg-donut-chocolate text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center border border-white">0</span>
+                </div>
+                <span class="hidden sm:inline">Carrinho</span>
+                <span id="cart-badge-total" class="bg-white/20 px-2 py-0.5 rounded-full text-[11px] font-semibold">0 MT</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="inicio" class="relative overflow-hidden pt-8 pb-12 md:py-16 bg-gradient-to-b from-donut-pinkLight/40 via-donut-cream to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                <div class="lg:col-span-7 space-y-5 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 bg-donut-pink/10 border border-donut-pink/20 text-donut-pinkDark px-3.5 py-1.5 rounded-full text-xs font-semibold">
+                        <i class="fa-solid fa-location-dot text-donut-pink"></i> Atendimento em Maputo & Matola
+                    </div>
+                    <h2 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-bold text-donut-chocolate leading-tight">
+                        Donuts Caseiros Produzidos Diariamente com <span class="text-donut-pink">Excelência</span>
+                    </h2>
+                    <p class="text-sm sm:text-base text-donut-chocolate/80 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Mini Donuts, Caixas Especialmente Decoradas com Frases e Donuts Recheados Gourmet preparados para o seu momento.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-2">
+                        <a href="#cardapio" class="w-full sm:w-auto bg-donut-pink hover:bg-donut-pinkDark text-white font-bold px-7 py-3.5 rounded-full shadow-sm hover:shadow transition-all text-center text-sm flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-utensils"></i> Explorar Cardápio
+                        </a>
+                        <a href="https://wa.me/258846209981?text=Olá!%20Gostaria%20de%20consultar%20disponibilidade%20de%20donuts." target="_blank" class="w-full sm:w-auto bg-white hover:bg-donut-pinkLight border border-donut-pink/40 text-donut-chocolate font-semibold px-7 py-3.5 rounded-full shadow-sm transition-all text-center text-sm flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-emerald-600 text-base"></i> Consultar Disponibilidade
+                        </a>
+                    </div>
+
+                    <div class="pt-6 grid grid-cols-2 sm:grid-cols-3 gap-3 border-t border-donut-chocolate/10 text-xs text-donut-chocolate/70 font-medium">
+                        <div class="flex items-center justify-center lg:justify-start gap-2">
+                            <i class="fa-solid fa-truck text-donut-pink"></i>
+                            <span>Entregas Matola & Maputo</span>
+                        </div>
+                        <div class="flex items-center justify-center lg:justify-start gap-2">
+                            <i class="fa-solid fa-store text-donut-pink"></i>
+                            <span>Retirada em Malhampsene</span>
+                        </div>
+                        <div class="flex items-center justify-center lg:justify-start gap-2 col-span-2 sm:col-span-1">
+                            <i class="fa-solid fa-shield-check text-donut-pink"></i>
+                            <span>Pagamento M-Pesa / e-Mola</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-md">
+                        <div class="relative bg-white rounded-2xl shadow-md overflow-hidden border border-donut-pink/15 p-3 group">
+                            <div class="relative w-full h-72 sm:h-80 bg-donut-cream/50 rounded-xl overflow-hidden cursor-pointer" onclick="openLightbox('foto1.jpeg', 'Caixa Festa com 24 Minis')">
+                                <img src="foto1.jpeg" alt="Caixa de Donuts" class="w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-300">
+                                <span class="absolute top-2 right-2 bg-black/60 text-white p-2 rounded-full text-xs hover:bg-donut-pink transition-colors"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+                            </div>
+                            <div class="p-4 bg-donut-chocolate/90 text-white absolute bottom-3 left-3 right-3 rounded-lg backdrop-blur-md">
+                                <span class="bg-donut-pink text-white text-[10px] font-bold px-2 py-0.5 rounded uppercase">Destaque</span>
+                                <h3 class="font-serif font-bold text-lg mt-1">Caixa Festa com 24 Minis</h3>
+                                <p class="text-xs text-donut-cream/80">Perfeita para reuniões e celebrações.</p>
+                                <div class="mt-3 flex items-center justify-between">
+                                    <span class="font-bold text-base text-donut-accent">650 MT</span>
+                                    <button onclick="quickBuy(3)" class="bg-donut-pink hover:bg-donut-pinkDark text-white px-3.5 py-1.5 rounded-full text-xs font-bold transition-colors">
+                                        Comprar Agora
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENU & PRODUCTS SECTION -->
+    <section id="cardapio" class="py-12 md:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-2xl mx-auto mb-8">
+            <span class="text-donut-pink font-bold text-xs tracking-widest uppercase">Cardápio</span>
+            <h2 class="font-serif text-2xl sm:text-4xl font-bold text-donut-chocolate mt-1">Nossa Seleção de Produtos</h2>
+            <p class="text-donut-chocolate/70 text-xs sm:text-sm mt-1.5">Escolha abaixo o seu produto. Clique na foto para dar zoom ou personalize o seu pedido.</p>
+        </div>
+
+        <!-- Search & Filter Controls -->
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8 bg-white p-3.5 rounded-2xl shadow-sm border border-donut-pink/10">
+            <div class="relative w-full md:w-72">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-donut-chocolate/40 text-xs"></i>
+                <input type="text" id="search-input" onkeyup="filterProducts()" placeholder="Pesquisar sabor ou caixa..." class="w-full pl-9 pr-3.5 py-2 rounded-full bg-donut-cream/50 border border-donut-pink/20 focus:outline-none focus:border-donut-pink text-xs text-donut-chocolate font-medium placeholder-donut-chocolate/40">
+            </div>
+
+            <div class="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-1 md:pb-0 hide-scrollbar" id="category-buttons">
+                <button onclick="setCategory('all')" class="cat-btn active bg-donut-pink text-white px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all">Todos</button>
+                <button onclick="setCategory('mini')" class="cat-btn bg-white hover:bg-donut-pinkLight text-donut-chocolate border border-donut-pink/20 px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all">Minis</button>
+                <button onclick="setCategory('frases')" class="cat-btn bg-white hover:bg-donut-pinkLight text-donut-chocolate border border-donut-pink/20 px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all">Com Frase</button>
+                <button onclick="setCategory('combos')" class="cat-btn bg-white hover:bg-donut-pinkLight text-donut-chocolate border border-donut-pink/20 px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all">Combos</button>
+                <button onclick="setCategory('bomba')" class="cat-btn bg-white hover:bg-donut-pinkLight text-donut-chocolate border border-donut-pink/20 px-3.5 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition-all">Gourmet</button>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div id="products-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+            <!-- Rendered dynamically -->
+        </div>
+    </section>
+
+    <!-- CUSTOMIZED HIGHLIGHT -->
+    <section id="personalizados" class="py-12 bg-donut-chocolate text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                <div class="space-y-4 text-center lg:text-left">
+                    <span class="bg-donut-pink text-white text-[10px] font-bold px-2.5 py-1 rounded uppercase tracking-wider">Presentes Personalizados</span>
+                    <h2 class="font-serif text-2xl sm:text-4xl font-bold text-donut-cream">Caixas com Frases Especialmente Preparadas</h2>
+                    <p class="text-donut-cream/80 text-xs sm:text-sm leading-relaxed">
+                        Escreva mensagens como "Eu Te Amo", "Parabéns" ou "Feliz Aniversário". Acompanha caixa decorada pronta para oferta.
+                    </p>
+                    <ul class="text-xs space-y-2 pt-1 text-donut-cream/90 inline-block text-left">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-donut-pink"></i> Seleção de coberturas cremosas</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-donut-pink"></i> Inscrição feita com precisão</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-donut-pink"></i> Embalagem pronta para presente</li>
+                    </ul>
+                    <div class="pt-2">
+                        <button onclick="openCustomModal(4)" class="bg-donut-pink hover:bg-donut-pinkDark text-white font-bold px-6 py-3 rounded-full text-xs shadow transition-all">
+                            Personalizar Caixa com Frase (250 MT)
+                        </button>
+                    </div>
+                </div>
+                <div class="flex justify-center">
+                    <div class="relative group cursor-pointer" onclick="openLightbox('foto1.jpeg', 'Caixa Personalizada com Frase')">
+                        <img src="foto1.jpeg" alt="Caixa Personalizada" class="rounded-xl shadow-lg border border-white/10 max-h-72 object-contain bg-donut-chocolateLight p-2">
+                        <span class="absolute top-3 right-3 bg-black/60 text-white p-2 rounded-full text-xs group-hover:bg-donut-pink transition-colors"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMBOS SECTION -->
+    <section id="combos" class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-2xl p-6 sm:p-8 border border-donut-pink/15 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="space-y-2 text-center md:text-left">
+                <span class="text-donut-pink font-bold text-xs uppercase tracking-wider">Oportunidade da Semana</span>
+                <h3 class="font-serif text-xl sm:text-2xl font-bold text-donut-chocolate">Combo Mini Recheados - 160 MT</h3>
+                <p class="text-donut-chocolate/70 text-xs sm:text-sm max-w-xl">Contém 4 Mini Donuts recheados com os sabores mais pedidos da semana.</p>
+            </div>
+            <div class="flex gap-2 w-full md:w-auto flex-col sm:flex-row">
+                <button onclick="quickBuy(5)" class="bg-donut-pink hover:bg-donut-pinkDark text-white font-bold px-6 py-3 rounded-full text-xs shadow transition-all whitespace-nowrap">
+                    Comprar Direto (160 MT)
+                </button>
+                <button onclick="openCustomModal(5)" class="bg-donut-cream hover:bg-donut-pinkLight text-donut-chocolate font-semibold px-5 py-3 rounded-full text-xs border border-donut-pink/20 transition-all whitespace-nowrap">
+                    Personalizar Sabores
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section id="galeria" class="py-12 bg-white border-y border-donut-pink/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-8">
+                <span class="text-donut-pink font-bold text-xs tracking-widest uppercase">Galeria</span>
+                <h2 class="font-serif text-2xl sm:text-3xl font-bold text-donut-chocolate mt-1">Registos dos Nossos Produtos</h2>
+                <p class="text-xs text-donut-chocolate/60 mt-1">Clique em qualquer foto para ver em tamanho expandido.</p>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                <div class="overflow-hidden rounded-xl cursor-pointer group bg-donut-cream/40 p-2 relative" onclick="openLightbox('foto1.jpeg', 'Caixa Sortida de Mini Donuts')">
+                    <img src="foto1.jpeg" alt="Galeria 1" class="w-full h-40 sm:h-52 object-contain group-hover:scale-105 transition-transform duration-300">
+                    <span class="absolute top-3 right-3 bg-black/50 text-white w-7 h-7 rounded-full flex items-center justify-center text-xs group-hover:bg-donut-pink transition-colors"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+                </div>
+                <div class="overflow-hidden rounded-xl cursor-pointer group bg-donut-cream/40 p-2 relative" onclick="openLightbox('foto2.jpeg', 'Caixa Especial de Presente')">
+                    <img src="foto2.jpeg" alt="Galeria 2" class="w-full h-40 sm:h-52 object-contain group-hover:scale-105 transition-transform duration-300">
+                    <span class="absolute top-3 right-3 bg-black/50 text-white w-7 h-7 rounded-full flex items-center justify-center text-xs group-hover:bg-donut-pink transition-colors"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+                </div>
+                <div class="overflow-hidden rounded-xl cursor-pointer group bg-donut-cream/40 p-2 relative" onclick="openLightbox('foto3.jpeg', 'Donuts Recheados Chocolate Supremo')">
+                    <img src="foto3.jpeg" alt="Galeria 3" class="w-full h-40 sm:h-52 object-contain group-hover:scale-105 transition-transform duration-300">
+                    <span class="absolute top-3 right-3 bg-black/50 text-white w-7 h-7 rounded-full flex items-center justify-center text-xs group-hover:bg-donut-pink transition-colors"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+                </div>
+                <div class="overflow-hidden rounded-xl cursor-pointer group bg-donut-cream/40 p-2 relative" onclick="openLightbox('foto4.jpeg', 'Mini Donuts para Festas')">
+                    <img src="foto4.jpeg" alt="Galeria 4" class="w-full h-40 sm:h-52 object-contain group-hover:scale-105 transition-transform duration-300">
+                    <span class="absolute top-3 right-3 bg-black/50 text-white w-7 h-7 rounded-full flex items-center justify-center text-xs group-hover:bg-donut-pink transition-colors"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contacto" class="bg-donut-chocolate text-white pt-12 pb-20 md:pb-10 border-t-2 border-donut-pink">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-10 border-b border-white/10 text-xs">
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-8 h-8 rounded-full bg-donut-pink flex items-center justify-center text-white text-sm font-bold">
+                            <i class="fa-solid fa-circle-dot"></i>
+                        </div>
+                        <span class="font-serif font-bold text-lg text-donut-cream">Donutslovers_mb</span>
+                    </div>
+                    <p class="text-donut-cream/70 leading-relaxed">
+                        Donuts caseiros produzidos diariamente. Atendimento e entregas para Maputo e Matola.
+                    </p>
+                    <p class="text-donut-pink font-medium"><i class="fa-solid fa-book-open mr-1"></i> Josué 1:7-9</p>
+                    
+                    <!-- REDES SOCIAIS / INSTAGRAM -->
+                    <div class="pt-2">
+                        <a href="https://www.instagram.com/donutslovers_mb" target="_blank" class="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 via-pink-600 to-yellow-500 hover:opacity-90 text-white px-3.5 py-1.5 rounded-full font-semibold transition-all">
+                            <i class="fa-brands fa-instagram text-sm"></i> @donutslovers_mb
+                        </a>
+                    </div>
+                </div>
+
+                <div class="space-y-2.5">
+                    <h3 class="font-bold text-sm text-donut-pink font-serif">Localização & Entregas</h3>
+                    <p class="text-donut-cream/80 flex items-start gap-2">
+                        <i class="fa-solid fa-location-dot text-donut-pink mt-0.5"></i>
+                        <span>Matola / Malhampsene (Tricamo), Moçambique</span>
+                    </p>
+                    <p class="text-donut-cream/80 flex items-start gap-2">
+                        <i class="fa-solid fa-truck text-donut-pink mt-0.5"></i>
+                        <span>Entregas via Moto Táxi / Yango para Matola e Cidade de Maputo.</span>
+                    </p>
+                </div>
+
+                <div class="space-y-2.5">
+                    <h3 class="font-bold text-sm text-donut-pink font-serif">Contactos & Pagamento</h3>
+                    <div class="space-y-1">
+                        <a href="tel:+258846209981" class="block text-donut-cream/80 hover:text-donut-pink transition-colors">
+                            <i class="fa-solid fa-phone text-donut-pink mr-1.5"></i> +258 84 620 9981
+                        </a>
+                        <a href="tel:+258878095794" class="block text-donut-cream/80 hover:text-donut-pink transition-colors">
+                            <i class="fa-solid fa-phone text-donut-pink mr-1.5"></i> +258 87 809 5794
+                        </a>
+                    </div>
+                    <div class="pt-1">
+                        <p class="text-donut-cream/90 font-semibold">Pagamentos:</p>
+                        <div class="flex items-center gap-2 mt-1">
+                            <span class="bg-red-600 text-white font-bold text-[10px] px-2 py-0.5 rounded">M-PESA</span>
+                            <span class="bg-orange-500 text-white font-bold text-[10px] px-2 py-0.5 rounded">e-MOLA</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-2.5">
+                    <h3 class="font-bold text-sm text-donut-pink font-serif">Horário de Atendimento</h3>
+                    <ul class="space-y-1 text-donut-cream/80">
+                        <li class="flex justify-between"><span>Segunda - Sexta:</span> <span class="font-semibold text-donut-cream">08:00 - 18:00</span></li>
+                        <li class="flex justify-between"><span>Sábado:</span> <span class="font-semibold text-donut-cream">08:00 - 17:00</span></li>
+                        <li class="flex justify-between"><span>Domingo:</span> <span class="font-semibold text-donut-pink">Encomendas</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-6 text-center text-[11px] text-donut-cream/50 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <p>&copy; 2026 Donutslovers_mb. Todos os direitos reservados.</p>
+                <div class="flex items-center gap-4">
+                    <a href="https://www.instagram.com/donutslovers_mb" target="_blank" class="hover:text-donut-pink transition-colors"><i class="fa-brands fa-instagram text-base"></i> Siga-nos no Instagram</a>
+                    <span>•</span>
+                    <p>Moçambique</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MOBILE NAVIGATION BAR -->
+    <div class="lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-donut-pink/15 py-2 px-3 shadow-lg flex items-center justify-around">
+        <a href="#inicio" class="flex flex-col items-center text-donut-chocolate hover:text-donut-pink text-[10px] font-medium">
+            <i class="fa-solid fa-house text-base mb-0.5"></i>
+            Início
+        </a>
+        <a href="#cardapio" class="flex flex-col items-center text-donut-chocolate hover:text-donut-pink text-[10px] font-medium">
+            <i class="fa-solid fa-utensils text-base mb-0.5"></i>
+            Cardápio
+        </a>
+        <button onclick="toggleCartDrawer()" class="flex flex-col items-center text-donut-pink text-[10px] font-bold relative">
+            <div class="relative">
+                <i class="fa-solid fa-bag-shopping text-lg mb-0.5"></i>
+                <span id="mobile-cart-count" class="absolute -top-1 -right-2 bg-donut-chocolate text-white text-[9px] w-3.5 h-3.5 rounded-full flex items-center justify-center">0</span>
+            </div>
+            Carrinho
+        </button>
+        <a href="#contacto" class="flex flex-col items-center text-donut-chocolate hover:text-donut-pink text-[10px] font-medium">
+            <i class="fa-solid fa-phone text-base mb-0.5"></i>
+            Contacto
+        </a>
+    </div>
+
+    <!-- CART SIDE DRAWER MODAL -->
+    <div id="cart-drawer-overlay" class="fixed inset-0 bg-donut-chocolate/60 z-50 opacity-0 pointer-events-none transition-opacity duration-300" onclick="toggleCartDrawer()"></div>
+    <div id="cart-drawer" class="fixed top-0 right-0 bottom-0 w-full sm:w-96 bg-white z-50 shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+        <div class="p-4 bg-donut-pink text-white flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-bag-shopping text-lg"></i>
+                <h3 class="font-bold font-serif text-base">Seu Carrinho</h3>
+            </div>
+            <button onclick="toggleCartDrawer()" class="text-white/80 hover:text-white text-xl font-bold">&times;</button>
+        </div>
+
+        <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 space-y-3">
+            <!-- Dynamic Cart Items -->
+        </div>
+
+        <div class="p-4 bg-donut-cream border-t border-donut-pink/15 space-y-3">
+            <div>
+                <label class="block text-[11px] font-bold text-donut-chocolate uppercase mb-1">Opção de Entrega / Retirada</label>
+                <select id="delivery-option" onchange="updateCartUI()" class="w-full text-xs font-medium p-2 rounded-lg border border-donut-pink/30 bg-white focus:outline-none focus:border-donut-pink">
+                    <option value="pickup">Retirada no Local (Malhampsene/Tricamo)</option>
+                    <option value="matola">Delivery Matola (Taxa a calcular)</option>
+                    <option value="maputo">Delivery Cidade de Maputo (Taxa a calcular)</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-[11px] font-bold text-donut-chocolate uppercase mb-1">Seu Nome & Contacto</label>
+                <input type="text" id="customer-info" placeholder="Ex: Maria - 841234567" class="w-full text-xs p-2 rounded-lg border border-donut-pink/30 bg-white focus:outline-none focus:border-donut-pink">
+            </div>
+
+            <div class="space-y-1 pt-2 border-t border-donut-chocolate/10 text-xs">
+                <div class="flex justify-between text-donut-chocolate/80">
+                    <span>Subtotal:</span>
+                    <span id="cart-subtotal" class="font-bold">0 MT</span>
+                </div>
+                <div class="flex justify-between text-donut-chocolate/80">
+                    <span>Taxa de Reserva (50%):</span>
+                    <span id="cart-deposit" class="font-bold text-donut-pink">0 MT</span>
+                </div>
+                <div class="flex justify-between text-sm font-bold text-donut-chocolate pt-1">
+                    <span>Total Estimado:</span>
+                    <span id="cart-total" class="text-donut-pinkDark">0 MT</span>
+                </div>
+            </div>
+
+            <button onclick="sendWhatsAppOrder()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow-sm flex items-center justify-center gap-2 transition-all text-xs">
+                <i class="fa-brands fa-whatsapp text-base"></i> Enviar Pedido via WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- CUSTOMIZATION MODAL -->
+    <div id="custom-modal" class="fixed inset-0 z-50 bg-donut-chocolate/60 flex items-center justify-center p-3 opacity-0 pointer-events-none transition-opacity duration-200">
+        <div id="custom-modal-box" class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-xl border border-donut-pink/15 modal-enter">
+            <div class="p-3.5 border-b border-donut-pink/10 bg-donut-pinkLight/40 flex items-center justify-between">
+                <h3 id="modal-product-title" class="font-serif font-bold text-base text-donut-chocolate">Personalizar Produto</h3>
+                <button onclick="closeCustomModal()" class="w-7 h-7 rounded-full bg-white text-donut-chocolate hover:bg-donut-pink hover:text-white transition-colors flex items-center justify-center font-bold text-sm">&times;</button>
+            </div>
+
+            <div class="p-4 space-y-4">
+                <div class="flex gap-3 items-center">
+                    <img id="modal-product-img" src="" alt="Produto" class="w-16 h-16 object-contain rounded-xl border border-donut-pink/20 bg-donut-cream/50 p-1 cursor-pointer" onclick="openLightbox(this.src, 'Visão do produto')">
+                    <div>
+                        <span id="modal-product-category" class="text-[9px] bg-donut-pink/10 text-donut-pink font-bold px-2 py-0.5 rounded uppercase">Categoria</span>
+                        <h4 id="modal-product-name" class="font-bold text-sm text-donut-chocolate">Nome do Item</h4>
+                        <p id="modal-product-price" class="text-donut-pinkDark font-bold text-sm">0 MT</p>
+                    </div>
+                </div>
+
+                <p id="modal-product-desc" class="text-xs text-donut-chocolate/70 leading-relaxed"></p>
+
+                <div class="space-y-3 pt-2 border-t border-donut-pink/10 text-xs">
+                    <div>
+                        <label class="block font-semibold text-donut-chocolate uppercase mb-1">1. Cobertura Principal</label>
+                        <select id="select-cobertura" class="w-full p-2 rounded-lg border border-donut-pink/30 bg-donut-cream/30 focus:outline-none focus:border-donut-pink font-medium">
+                            <option value="Chocolate Tradicional">Chocolate Preto Gourmet</option>
+                            <option value="Chocolate Branco">Chocolate Branco Cremoso</option>
+                            <option value="Morango Rosa">Glacê de Morango Rosa</option>
+                            <option value="Doce de Leite">Doce de Leite</option>
+                            <option value="Misto Variado">Misto / Sortido</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-donut-chocolate uppercase mb-1">2. Recheio Interno</label>
+                        <select id="select-recheio" class="w-full p-2 rounded-lg border border-donut-pink/30 bg-donut-cream/30 focus:outline-none focus:border-donut-pink font-medium">
+                            <option value="Creme de Chocolate">Creme de Chocolate</option>
+                            <option value="Doce de Leite">Doce de Leite</option>
+                            <option value="Baunilha Real">Creme de Baunilha</option>
+                            <option value="Sem Recheio">Sem Recheio (Simples)</option>
+                        </select>
+                    </div>
+
+                    <div id="phrase-input-container">
+                        <label class="block font-semibold text-donut-chocolate uppercase mb-1">3. Frase Personalizada (Opcional)</label>
+                        <input type="text" id="custom-phrase" placeholder="Ex: 'Parabéns!', 'Eu Te Amo'" class="w-full p-2 rounded-lg border border-donut-pink/30 bg-donut-cream/30 focus:outline-none focus:border-donut-pink font-medium">
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-donut-chocolate uppercase mb-1">Observações Adicionais</label>
+                        <textarea id="custom-notes" rows="2" placeholder="Ex: Granulado colorido, fita de presente..." class="w-full p-2 rounded-lg border border-donut-pink/30 bg-donut-cream/30 focus:outline-none focus:border-donut-pink font-medium"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-3 bg-donut-cream/50 border-t border-donut-pink/10 flex items-center justify-between gap-3">
+                <div class="flex items-center gap-2 bg-white px-2.5 py-1 rounded-full border border-donut-pink/20">
+                    <button onclick="adjustModalQty(-1)" class="w-5 h-5 rounded-full bg-donut-pink/10 text-donut-pink font-bold hover:bg-donut-pink hover:text-white flex items-center justify-center text-xs">-</button>
+                    <span id="modal-qty" class="font-bold text-xs w-4 text-center">1</span>
+                    <button onclick="adjustModalQty(1)" class="w-5 h-5 rounded-full bg-donut-pink/10 text-donut-pink font-bold hover:bg-donut-pink hover:text-white flex items-center justify-center text-xs">+</button>
+                </div>
+                <button onclick="addCustomizedProductToCart()" class="flex-1 bg-donut-pink hover:bg-donut-pinkDark text-white font-bold py-2.5 rounded-full text-xs shadow transition-all text-center">
+                    Adicionar ao Carrinho
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX / ZOOM MODAL -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/90 hidden flex items-center justify-center p-4 transition-all" onclick="closeLightbox()">
+        <div class="relative max-w-3xl w-full flex flex-col items-center" onclick="event.stopPropagation()">
+            <button onclick="closeLightbox()" class="absolute -top-10 right-0 text-white text-3xl font-bold hover:text-donut-pink transition-colors">&times;</button>
+            <div class="bg-white/5 p-2 rounded-2xl border border-white/10 max-h-[80vh] flex items-center justify-center">
+                <img id="lightbox-img" src="" alt="Imagem Ampliada" class="max-h-[75vh] w-auto rounded-lg object-contain">
+            </div>
+            <p id="lightbox-caption" class="text-white text-sm font-semibold mt-3 text-center bg-black/50 px-4 py-1.5 rounded-full border border-white/10"></p>
+        </div>
+    </div>
+
+    <script>
+        // PRODUCTS DATABASE
+        const products = [
+            {
+                id: 1,
+                name: "Caixa 6 Mini Donuts Caseiros",
+                category: "mini",
+                price: 170,
+                image: "foto1.jpeg",
+                description: "Caixa prática individual com cobertura sortida.",
+                badge: "Lanche Individual"
+            },
+            {
+                id: 2,
+                name: "Caixa 12 Mini Donuts Família",
+                category: "mini",
+                price: 340,
+                image: "foto2.jpeg",
+                description: "Caixa média ideal para partilhar em família ou no trabalho.",
+                badge: "Popular"
+            },
+            {
+                id: 3,
+                name: "Caixa Festa 24 Mini Donuts",
+                category: "mini",
+                price: 650,
+                image: "foto4.jpeg",
+                description: "Excelente opção para eventos, festas e reuniões.",
+                badge: "Mais Vendido"
+            },
+            {
+                id: 4,
+                name: "Caixa Presente 4 Donuts c/ Frase",
+                category: "frases",
+                price: 250,
+                image: "foto2.jpeg",
+                description: "Caixa decorada com fita de presente e frase personalizada.",
+                badge: "Especial Presente"
+            },
+            {
+                id: 5,
+                name: "Combo 4 Mini Recheados",
+                category: "combos",
+                price: 160,
+                image: "foto2.jpeg",
+                description: "4 Mini donuts com recheio cremoso de chocolate e doce de leite.",
+                badge: "Promoção"
+            },
+            {
+                id: 6,
+                name: "Donut Gigante Bomba Recheado",
+                category: "bomba",
+                price: 180,
+                image: "foto1.jpeg",
+                description: "Tamanho grande com recheio abundante e cobertura gourmet.",
+                badge: "Gourmet"
+            }
+        ];
+
+        // APP STATE
+        let cart = [];
+        let currentCategory = 'all';
+        let activeModalProduct = null;
+        let activeModalQty = 1;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            updateCartUI();
+        });
+
+        // RENDER PRODUCTS
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            const searchKeyword = document.getElementById('search-input').value.toLowerCase();
+            
+            grid.innerHTML = '';
+
+            const filtered = products.filter(p => {
+                const matchesCat = (currentCategory === 'all' || p.category === currentCategory);
+                const matchesSearch = p.name.toLowerCase().includes(searchKeyword) || p.description.toLowerCase().includes(searchKeyword);
+                return matchesCat && matchesSearch;
+            });
+
+            if(filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-10 text-center">
+                        <p class="text-donut-chocolate/60 text-xs font-semibold">Nenhum produto encontrado nesta categoria.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(product => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md border border-donut-pink/15 transition-all flex flex-col justify-between group";
+                
+                card.innerHTML = `
+                    <div>
+                        <!-- IMAGEM COM ENQUADRAMENTO COMPLETO E BOTAO DE ZOOM -->
+                        <div class="relative h-48 bg-donut-cream/40 overflow-hidden flex items-center justify-center p-2 cursor-pointer" onclick="openLightbox('${product.image}', '${product.name}')">
+                            <img src="${product.image}" alt="${product.name}" class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-300">
+                            <span class="absolute top-2.5 left-2.5 bg-donut-pink text-white text-[9px] font-bold px-2 py-0.5 rounded uppercase z-10">${product.badge}</span>
+                            <span class="absolute top-2.5 right-2.5 bg-black/50 hover:bg-donut-pink text-white w-7 h-7 rounded-full flex items-center justify-center text-xs transition-colors shadow-sm" title="Ampliar Imagem">
+                                <i class="fa-solid fa-magnifying-glass-plus"></i>
+                            </span>
+                        </div>
+
+                        <div class="p-4 space-y-1.5">
+                            <h3 class="font-serif font-bold text-base text-donut-chocolate">${product.name}</h3>
+                            <p class="text-xs text-donut-chocolate/70 leading-relaxed">${product.description}</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 pt-0 flex flex-col gap-2.5 border-t border-donut-cream/80 mt-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-[10px] text-donut-chocolate/50 font-medium uppercase">Preço</span>
+                            <span class="font-bold text-base text-donut-pinkDark">${product.price} MT</span>
+                        </div>
+                        
+                        <!-- BOTÕES: COMPRAR E PERSONALIZAR -->
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="quickBuy(${product.id})" class="bg-donut-pink hover:bg-donut-pinkDark text-white font-bold py-2 px-3 rounded-full text-xs transition-all flex items-center justify-center gap-1">
+                                <i class="fa-solid fa-cart-plus"></i> Comprar
+                            </button>
+                            <button onclick="openCustomModal(${product.id})" class="bg-donut-pinkLight hover:bg-donut-pink/20 text-donut-chocolate font-semibold py-2 px-3 rounded-full text-xs transition-all border border-donut-pink/20 flex items-center justify-center gap-1">
+                                <i class="fa-solid fa-sliders"></i> Personalizar
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // QUICK BUY DIRECTLY TO CART & OPEN DRAWER
+        function quickBuy(productId) {
+            const product = products.find(p => p.id === productId);
+            if(!product) return;
+
+            const cartItem = {
+                cartId: Date.now(),
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                quantity: 1,
+                cobertura: 'Tradicional da Casa',
+                recheio: 'Padrão',
+                phrase: 'Nenhuma',
+                notes: 'Sem especificações'
+            };
+
+            cart.push(cartItem);
+            updateCartUI();
+            toggleCartDrawer(true);
+        }
+
+        // CATEGORY FILTER
+        function setCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.remove('bg-donut-pink', 'text-white');
+                btn.classList.add('bg-white', 'text-donut-chocolate');
+            });
+
+            event.currentTarget.classList.add('bg-donut-pink', 'text-white');
+            event.currentTarget.classList.remove('bg-white', 'text-donut-chocolate');
+
+            renderProducts();
+        }
+
+        function filterProducts() {
+            renderProducts();
+        }
+
+        // CUSTOMIZATION MODAL
+        function openCustomModal(productId) {
+            const product = products.find(p => p.id === productId);
+            if(!product) return;
+
+            activeModalProduct = product;
+            activeModalQty = 1;
+
+            document.getElementById('modal-product-title').innerText = "Personalizar " + product.name;
+            document.getElementById('modal-product-name').innerText = product.name;
+            document.getElementById('modal-product-price').innerText = product.price + " MT";
+            document.getElementById('modal-product-img').src = product.image;
+            document.getElementById('modal-product-desc').innerText = product.description;
+            document.getElementById('modal-product-category').innerText = product.category;
+            document.getElementById('modal-qty').innerText = activeModalQty;
+
+            document.getElementById('custom-phrase').value = '';
+            document.getElementById('custom-notes').value = '';
+
+            const modal = document.getElementById('custom-modal');
+            const box = document.getElementById('custom-modal-box');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            box.classList.remove('modal-exit');
+            box.classList.add('modal-enter-active');
+        }
+
+        function closeCustomModal() {
+            const modal = document.getElementById('custom-modal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        function adjustModalQty(delta) {
+            activeModalQty += delta;
+            if(activeModalQty < 1) activeModalQty = 1;
+            document.getElementById('modal-qty').innerText = activeModalQty;
+        }
+
+        function addCustomizedProductToCart() {
+            if(!activeModalProduct) return;
+
+            const cobertura = document.getElementById('select-cobertura').value;
+            const recheio = document.getElementById('select-recheio').value;
+            const phrase = document.getElementById('custom-phrase').value;
+            const notes = document.getElementById('custom-notes').value;
+
+            const cartItem = {
+                cartId: Date.now(),
+                id: activeModalProduct.id,
+                name: activeModalProduct.name,
+                price: activeModalProduct.price,
+                quantity: activeModalQty,
+                cobertura: cobertura,
+                recheio: recheio,
+                phrase: phrase ? phrase : 'Nenhuma',
+                notes: notes ? notes : 'Nenhuma'
+            };
+
+            cart.push(cartItem);
+            updateCartUI();
+            closeCustomModal();
+            toggleCartDrawer(true);
+        }
+
+        // DRAWER CART TOGGLE
+        function toggleCartDrawer(forceOpen = false) {
+            const drawer = document.getElementById('cart-drawer');
+            const overlay = document.getElementById('cart-drawer-overlay');
+
+            const isOpen = !drawer.classList.contains('translate-x-full');
+
+            if(isOpen && !forceOpen) {
+                drawer.classList.add('translate-x-full');
+                overlay.classList.add('opacity-0', 'pointer-events-none');
+            } else {
+                drawer.classList.remove('translate-x-full');
+                overlay.classList.remove('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        // UPDATE CART UI
+        function updateCartUI() {
+            const container = document.getElementById('cart-items-container');
+            const badgeCount = document.getElementById('cart-badge-count');
+            const mobileCount = document.getElementById('mobile-cart-count');
+            const badgeTotal = document.getElementById('cart-badge-total');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            const depositEl = document.getElementById('cart-deposit');
+            const totalEl = document.getElementById('cart-total');
+
+            let subtotal = 0;
+            let totalItems = 0;
+
+            cart.forEach(item => {
+                subtotal += item.price * item.quantity;
+                totalItems += item.quantity;
+            });
+
+            badgeCount.innerText = totalItems;
+            mobileCount.innerText = totalItems;
+            badgeTotal.innerText = subtotal + " MT";
+            subtotalEl.innerText = subtotal + " MT";
+
+            const deposit = subtotal * 0.5;
+            depositEl.innerText = deposit + " MT";
+            totalEl.innerText = subtotal + " MT";
+
+            if(cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-10 text-donut-chocolate/50 space-y-2">
+                        <i class="fa-solid fa-basket-shopping text-3xl text-donut-pink/30"></i>
+                        <p class="text-xs font-medium">Seu carrinho está vazio.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = '';
+            cart.forEach(item => {
+                const el = document.createElement('div');
+                el.className = "bg-donut-cream/60 p-3 rounded-xl border border-donut-pink/15 space-y-1.5 relative";
+                
+                el.innerHTML = `
+                    <div class="flex justify-between items-start gap-2">
+                        <h4 class="font-bold text-xs text-donut-chocolate">${item.name}</h4>
+                        <button onclick="removeCartItem(${item.cartId})" class="text-red-400 hover:text-red-600 text-xs font-bold">&times;</button>
+                    </div>
+                    <div class="text-[10px] text-donut-chocolate/70 space-y-0.5">
+                        <p><span class="font-semibold">Cobertura:</span> ${item.cobertura}</p>
+                        <p><span class="font-semibold">Recheio:</span> ${item.recheio}</p>
+                        ${item.phrase !== 'Nenhuma' ? `<p class="text-donut-pinkDark font-bold">Frase: "${item.phrase}"</p>` : ''}
+                    </div>
+                    <div class="flex justify-between items-center pt-1 border-t border-donut-chocolate/5">
+                        <span class="font-bold text-xs text-donut-pinkDark">${item.price * item.quantity} MT</span>
+                        <div class="flex items-center gap-1.5 bg-white px-2 py-0.5 rounded border border-donut-pink/20">
+                            <button onclick="changeCartItemQty(${item.cartId}, -1)" class="text-donut-pink font-bold text-xs">-</button>
+                            <span class="text-xs font-bold">${item.quantity}</span>
+                            <button onclick="changeCartItemQty(${item.cartId}, 1)" class="text-donut-pink font-bold text-xs">+</button>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(el);
+            });
+        }
+
+        function removeCartItem(cartId) {
+            cart = cart.filter(i => i.cartId !== cartId);
+            updateCartUI();
+        }
+
+        function changeCartItemQty(cartId, delta) {
+            const item = cart.find(i => i.cartId === cartId);
+            if(item) {
+                item.quantity += delta;
+                if(item.quantity <= 0) {
+                    removeCartItem(cartId);
+                } else {
+                    updateCartUI();
+                }
+            }
+        }
+
+        // WHATSAPP CHECKOUT
+        function sendWhatsAppOrder() {
+            if(cart.length === 0) {
+                alert("Adicione pelo menos um item ao carrinho!");
+                return;
+            }
+
+            const customerInfo = document.getElementById('customer-info').value || "Não informado";
+            const deliveryOption = document.getElementById('delivery-option');
+            const deliveryText = deliveryOption.options[deliveryOption.selectedIndex].text;
+
+            let subtotal = 0;
+            let orderLines = "";
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+
+                orderLines += `*${index + 1}. ${item.name}* (${item.quantity}x)\n`;
+                orderLines += `   - Cobertura: ${item.cobertura}\n`;
+                orderLines += `   - Recheio: ${item.recheio}\n`;
+                if(item.phrase !== 'Nenhuma') orderLines += `   - Frase: "${item.phrase}"\n`;
+                if(item.notes !== 'Nenhuma') orderLines += `   - Obs: ${item.notes}\n`;
+                orderLines += `   - Valor: ${itemTotal} MT\n\n`;
+            });
+
+            const deposit = subtotal * 0.5;
+
+            let message = `*PEDIDO - DONUTSLOVERS_MB*\n\n`;
+            message += `*Cliente:* ${customerInfo}\n`;
+            message += `*Entrega:* ${deliveryText}\n\n`;
+            message += `*ITENS DO PEDIDO:*\n${orderLines}`;
+            message += `------------------------------------\n`;
+            message += `*Subtotal:* ${subtotal} MT\n`;
+            message += `*Taxa de Reserva (50% M-Pesa/e-Mola):* ${deposit} MT\n\n`;
+            message += `Gostaria de confirmar a disponibilidade e fechar a encomenda.`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappNumber = "258846209981";
+            window.open(`https://wa.me/${whatsappNumber}?text=${encodedMessage}`, '_blank');
+        }
+
+        // LIGHTBOX / ZOOM
+        function openLightbox(imgSrc, captionText) {
+            const lightbox = document.getElementById('lightbox-modal');
+            const img = document.getElementById('lightbox-img');
+            const caption = document.getElementById('lightbox-caption');
+
+            img.src = imgSrc;
+            caption.innerText = captionText;
+            lightbox.classList.remove('hidden');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
